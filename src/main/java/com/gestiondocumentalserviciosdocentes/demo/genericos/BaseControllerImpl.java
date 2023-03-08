@@ -28,7 +28,6 @@ public abstract class BaseControllerImpl <T, S extends GenericServiceImplm<T, In
 	@PostMapping(value = "/save")
 	public ResponseEntity<T> save (@RequestBody T entidad){
 		T objeto = service.save(entidad);
-		
 		return new ResponseEntity<T>(objeto, HttpStatus.OK);
 	}
 	

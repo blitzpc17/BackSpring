@@ -1,5 +1,8 @@
 package com.gestiondocumentalserviciosdocentes.demo.implServicio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,21 @@ public class InterfaceProgramaEducativoServiceImpl extends GenericServiceImplm<P
 		// TODO Auto-generated method stub
 		return iProgramaEducativo;
 	}
+
+	@Override
+	public ProgramaEducativo BuscarDocumentoNombre(String nombredoc, int deptoId) {
+		// TODO Auto-generated method stub
+		return iProgramaEducativo.BuscarDocumentoNombre(nombredoc, deptoId);
+	}
+
+	@Override
+	public List<ProgramaEducativo> ListarDocumentosPorDepto(int deptoId) {
+		// TODO Auto-generated method stub
+		return iProgramaEducativo.ListarDocumentosPorDepto(deptoId);
+	}
+
+	
+	
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.gestiondocumentalserviciosdocentes.demo.modelo;
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,20 +19,44 @@ public class ProgramaEducativo {
 	private Date Fecha;	
 	private String Tipo;
 	private String Enlace;
+	private String ruta_archivo;
+	private int id_Departamento;
 	
 	public ProgramaEducativo() {
 		
 	}
 	
-	public ProgramaEducativo(int id, String nombre, Date fecha, String tipo, String enlace) {
+	public ProgramaEducativo(int id, String nombre, Date fecha, String tipo, String enlace, String ruta_archivo, int id_departamento) {
+	
 		super();
 		this.id = id;
-		Nombre = nombre;
-		Fecha = fecha;
-		Tipo = tipo;
-		Enlace = enlace;
+		this.Nombre = nombre;
+		this.Fecha = fecha;
+		this.Tipo = tipo;
+		this.Enlace = enlace;
+		this.ruta_archivo = ruta_archivo;
+		this.id_Departamento = id_departamento;
+		System.out.println(this.id_Departamento);
 	}
 	
+	
+
+	public String getRuta_archivo() {
+		return ruta_archivo;
+	}
+
+	public void setRuta_archivo(String ruta_archivo) {
+		this.ruta_archivo = ruta_archivo;
+	}
+
+	public int getId_Departamento() {
+		return id_Departamento;
+	}
+
+	public void setId_Departamento(int id_Departamento) {
+		this.id_Departamento = id_Departamento;
+	}
+
 	public int getId() {
 		return id;
 	}
