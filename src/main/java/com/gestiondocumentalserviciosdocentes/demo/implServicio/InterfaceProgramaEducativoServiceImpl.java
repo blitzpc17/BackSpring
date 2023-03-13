@@ -11,6 +11,10 @@ import com.gestiondocumentalserviciosdocentes.demo.genericos.BaseRepository;
 import com.gestiondocumentalserviciosdocentes.demo.genericos.GenericServiceImplm;
 import com.gestiondocumentalserviciosdocentes.demo.interfaz.IProgramaEducativo;
 import com.gestiondocumentalserviciosdocentes.demo.modelo.ProgramaEducativo;
+import com.gestiondocumentalserviciosdocentes.demo.modelo.clsReportesLaboratorios;
+
+import com.gestiondocumentalserviciosdocentes.demo.interfaz.IConsultaReportesLaboratorio;
+import com.gestiondocumentalserviciosdocentes.demo.interfaz.IConsultaReportesLaboratorios;
 
 
 
@@ -22,24 +26,25 @@ public class InterfaceProgramaEducativoServiceImpl extends GenericServiceImplm<P
 	
 	@Override
 	public BaseRepository<ProgramaEducativo, Integer> getBaseRepository() {
-		// TODO Auto-generated method stub
 		return iProgramaEducativo;
 	}
 
 	@Override
 	public ProgramaEducativo BuscarDocumentoNombre(String nombredoc, int deptoId) {
-		// TODO Auto-generated method stub
 		return iProgramaEducativo.BuscarDocumentoNombre(nombredoc, deptoId);
 	}
 
 	@Override
 	public List<ProgramaEducativo> ListarDocumentosPorDepto(int deptoId) {
-		// TODO Auto-generated method stub
 		return iProgramaEducativo.ListarDocumentosPorDepto(deptoId);
 	}
 
-	
-	
+	@Override
+	public List<clsReportesLaboratorios> ListarReportesLaboratoriosDepto(int deptoId) {
+		IConsultaReportesLaboratorios dao = new IConsultaReportesLaboratorios();
+		return dao.ListarReportesLaboratoriosDepto(deptoId);
+		
+	}	
 	
 	
 	

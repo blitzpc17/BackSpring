@@ -20,6 +20,7 @@ import com.gestiondocumentalserviciosdocentes.demo.modelo.FileResponse;
 import com.gestiondocumentalserviciosdocentes.demo.genericos.Utilidades;
 import com.gestiondocumentalserviciosdocentes.demo.implServicio.InterfaceProgramaEducativoServiceImpl;
 import com.gestiondocumentalserviciosdocentes.demo.modelo.ProgramaEducativo;
+import com.gestiondocumentalserviciosdocentes.demo.modelo.clsReportesLaboratorios;
 
 @RestController
 @RequestMapping("api/v1/programaeducativo")
@@ -73,6 +74,11 @@ public class ProgramaEducativoController extends BaseControllerImpl<ProgramaEduc
 		
 		return res;
 		
+	}
+	
+	@GetMapping(value = "/documentos/files/listar/{deptoId}", produces=MediaType.APPLICATION_JSON_VALUE)
+	List<clsReportesLaboratorios> ListarReportesLaboratorioPeriodo(@PathVariable int deptoId) {
+		return service.ListarReportesLaboratoriosDepto(deptoId);
 	}
 	
 	
