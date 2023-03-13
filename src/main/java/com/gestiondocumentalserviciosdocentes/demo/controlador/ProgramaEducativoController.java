@@ -45,7 +45,7 @@ public class ProgramaEducativoController extends BaseControllerImpl<ProgramaEduc
 		
 		ProgramaEducativo obj = new ProgramaEducativo();
 		
-		obj.setEnlace(enlace);
+		obj.setEnlace(enlace=="null"?null:enlace);
 		obj.setTipo(tipo);
 		obj.setNombre(nombre);
 		obj.setFecha(new Date());
@@ -54,6 +54,10 @@ public class ProgramaEducativoController extends BaseControllerImpl<ProgramaEduc
 		
 		if(id != null) {
 			obj.setId(id);
+			entidad = service.get(id);
+			if(file==null && entidad.getNombre() != obj.getNombre()) {
+				Utilidades.RenombrarArchivo(entidad.getNombre(), obj.getNombre());
+			}
 		}
 		
 		entidad = service.save(obj);
@@ -68,7 +72,8 @@ public class ProgramaEducativoController extends BaseControllerImpl<ProgramaEduc
 				return res;
 			}
 			
-		}else {
+		}
+		else {
 			res = new FileResponse(new Date().toString(), 501, "Ocurrio un problema al tratar de guardar el registro");
 		}
 		

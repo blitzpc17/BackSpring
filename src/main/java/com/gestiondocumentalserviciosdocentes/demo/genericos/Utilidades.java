@@ -16,10 +16,12 @@ public class Utilidades {
 	private static FileResponse response;
 	private static byte[] fileBytes;
 	
+	private static String ruta="C:\\Users\\USER\\Downloads\\Plataforma_Gestion_Docentes\\Plataforma_Gestion_Docentes\\FrontReact\\public\\Documentos\\Prueba\\";
+	
+	
 	
 	public static FileResponse SubirArchivos(MultipartFile file, String nombreArchivo) {
 		StringBuilder builder = new StringBuilder();
-		String ruta="C:\\Users\\USER\\Downloads\\Plataforma_Gestion_Docentes\\Plataforma_Gestion_Docentes\\FrontReact\\public\\Documentos\\Prueba\\";
 		
 		File directorio = new File(ruta);
 		
@@ -46,6 +48,22 @@ public class Utilidades {
 		return response;
 			
 		
+	}
+	
+	
+	public static FileResponse RenombrarArchivo(String nombreAnt, String nombreNuevo)
+	{		
+		try {
+			Path original = Paths.get(ruta+nombreAnt+".pdf");
+			Path nuevo = Paths.get(ruta+nombreNuevo+".pdf");
+			Files.move(original, nuevo);
+			response = new FileResponse(new Date().toString(), 200, "Archivo modificado correctamente");
+		}catch(IOException e) {
+			System.out.print(e.toString());
+			response = new FileResponse(new Date().toString(), 501, "Error al renombrar el archivo");
+		}
+		
+		return response;
 	}
 
 }
