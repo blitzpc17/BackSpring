@@ -36,7 +36,8 @@ public class RecursosAsignadosController  extends BaseControllerImpl<RecursoAsig
 			@RequestParam(required=true, name="PeriodoId") int PeriodoId, @RequestParam(required=true, name="Poa") double Poa,
 			@RequestParam(required=false, name="PoaEvidencia") MultipartFile PoaEvidencia, @RequestParam(required=true, name="Pta") double Pta,
 			@RequestParam(required=false, name="PtaEvidencia") MultipartFile PtaEvidencia, @RequestParam(required=true, name="PagoInscripcion") double PagoInscripcion,
-			@RequestParam(required=true, name="MontoCaptado") double MontoCaptado, @RequestParam(required=true, name="MontoTotal") double MontoTotal
+			@RequestParam(required=true, name="MontoCaptado") double MontoCaptado, @RequestParam(required=true, name="MontoTotal") double MontoTotal,
+			@RequestParam(required=true, name="Matricula") double Matricula, @RequestParam(required=false, name="MatriculaEvidencia") MultipartFile MatriculaEvidencia
 			) {
 		
 		FileResponse res = new FileResponse();
@@ -51,6 +52,8 @@ public class RecursosAsignadosController  extends BaseControllerImpl<RecursoAsig
 		obj.setPagoInscripcion(PagoInscripcion);
 		obj.setMontoCaptado(MontoCaptado);
 		obj.setMontoCaptadoTotal(MontoTotal);
+		obj.setMatricula(Matricula);
+		obj.setMatriculaEvidencia("matricula.pdf");
 		
 		service.save(obj);
 		

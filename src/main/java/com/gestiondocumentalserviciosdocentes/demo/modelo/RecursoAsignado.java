@@ -23,14 +23,16 @@ public class RecursoAsignado {
 	private double PagoInscripcion;
 	private double MontoCaptado;
 	private double MontoCaptadoTotal;
+	private double Matricula;
+	private String MatriculaEvidencia;
 	
-	public RecursoAsignado() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
+
+
 
 	public RecursoAsignado(int id, int id_Periodo, double poa, String poaEvidencia, double pta, String ptaEvidencia,
-			int id_Departamento, double pagoInscripcion, double montoCaptado, double montoCaptadoTotal) {
+			int id_Departamento, double pagoInscripcion, double montoCaptado, double montoCaptadoTotal,
+			double matricula, String matriculaEvidencia) {
 		super();
 		Id = id;
 		this.id_Periodo = id_Periodo;
@@ -42,7 +44,18 @@ public class RecursoAsignado {
 		PagoInscripcion = pagoInscripcion;
 		MontoCaptado = montoCaptado;
 		MontoCaptadoTotal = montoCaptadoTotal;
+		Matricula = matricula;
+		setMatriculaEvidencia(matriculaEvidencia);
 	}
+
+
+
+	public RecursoAsignado() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
 
 	public int getId() {
 		return Id;
@@ -122,6 +135,30 @@ public class RecursoAsignado {
 
 	public void setMontoCaptadoTotal(double montoCaptadoTotal) {
 		MontoCaptadoTotal = montoCaptadoTotal;
+	}
+
+
+
+	public double getMatricula() {
+		return Matricula;
+	}
+
+
+
+	public void setMatricula(double matricula) {
+		Matricula = matricula;
+	}
+
+
+
+	public String getMatriculaEvidencia() {
+		return MatriculaEvidencia;
+	}
+
+
+
+	public void setMatriculaEvidencia(String matriculaEvidencia) {
+		MatriculaEvidencia = matriculaEvidencia;
 	}
 	
 	
