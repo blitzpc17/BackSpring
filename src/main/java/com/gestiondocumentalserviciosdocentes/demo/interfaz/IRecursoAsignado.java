@@ -9,7 +9,7 @@ import com.gestiondocumentalserviciosdocentes.demo.modelo.RecursoAsignado;
 
 public interface IRecursoAsignado extends BaseRepository<RecursoAsignado, Integer>{
 	
-	@Query(value = "SELECT *FROM recurso_asignado AS ra WHERE ra.periodoId = :periodoId and ra.DepartamentoId = :deptoId ", nativeQuery=true)
+	@Query(value = "SELECT *FROM recurso_asignado AS ra WHERE ra.id_Periodo = :periodoId and ra.id_Departamento = :deptoId ", nativeQuery=true)
 	RecursoAsignado Obtener(@Param("periodoId") int PeriodoId, @Param("deptoId") int deptoId);
 	
 	

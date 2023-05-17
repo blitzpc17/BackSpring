@@ -16,14 +16,17 @@ public class RecursoAsignado {
 	private int Id;
 	private int id_Periodo;
 	private double Poa;
+	@Column(nullable = true)
 	private String PoaEvidencia;
 	private double Pta;
+	@Column(nullable = true)
 	private String PtaEvidencia;
 	private int id_Departamento;
 	private double PagoInscripcion;
 	private double MontoCaptado;
 	private double MontoCaptadoTotal;
 	private double Matricula;
+	@Column(nullable = true)
 	private String MatriculaEvidencia;
 	
 	
@@ -84,7 +87,7 @@ public class RecursoAsignado {
 	public String getPoaEvidencia() {
 		return PoaEvidencia;
 	}
-
+	
 	public void setPoaEvidencia(String poaEvidencia) {
 		PoaEvidencia = poaEvidencia;
 	}
