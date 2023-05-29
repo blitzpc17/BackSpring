@@ -11,6 +11,5 @@ public interface InterfaceRecursoAsignadoService extends GenericService<RecursoA
 	
 	RecursoAsignado ObtenerRecursoAsignadoDeptoPeriodo(int depto, int periodo);
 	
-	
 
 }

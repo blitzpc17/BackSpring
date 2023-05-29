@@ -28,6 +28,8 @@ public class RecursoAsignadoServiceImpl extends GenericServiceImplm<RecursoAsign
 		// TODO Auto-generated method stub
 		return iRecursoAsignado.Obtener(periodo, depto);
 	}
+	
+	
 
 	
 	

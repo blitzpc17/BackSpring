@@ -15,6 +15,7 @@ import com.gestiondocumentalserviciosdocentes.demo.modelo.FileResponse;
 import com.gestiondocumentalserviciosdocentes.demo.modelo.RecursoAsignado;
 import com.gestiondocumentalserviciosdocentes.demo.modelo.RecursoEjercido;
 import com.gestiondocumentalserviciosdocentes.demo.genericos.BaseControllerImpl;
+import com.gestiondocumentalserviciosdocentes.demo.genericos.Utilidades;
 import com.gestiondocumentalserviciosdocentes.demo.implServicio.RecursoEjercidoServiceImpl;
 
 @RestController
@@ -32,20 +33,20 @@ public class RecursoEjercidoController extends BaseControllerImpl<RecursoEjercid
 	public FileResponse  InsertarRecursoEjercido(@RequestParam(required=true, name="DepartamentoId") int DepartamentoId,
 			@RequestParam(required=true, name="PeriodoId") int PeriodoId, 
 			@RequestParam(required=true, name="CapDos") double capDos, @RequestParam(required=true, name="CapDosP") double capDosP,
-			@RequestParam(required=false, name="CapDosEvidencia") MultipartFile CapDosEvidencia, @RequestParam(required=false, name="CapDosP") double CapDosP, 
-			@RequestParam(required=true, name="CapTres") double CapTres,
-			@RequestParam(required=false, name="CapTresEvidencia") MultipartFile CapTresEvidencia, @RequestParam(required=false, name="CapTresP") double CapTresP,
-			@RequestParam(required=true, name="CapCuatro") double CapCuatro,
-			@RequestParam(required=false, name="CapCuatroEvidencia") MultipartFile CapCuatroEvidencia, @RequestParam(required=false, name="CapCuatroP") double CapCuatroP,
-			@RequestParam(required=true, name="CapCinco") double CapCinco,
-			@RequestParam(required=false, name="CapCincoEvidencia") MultipartFile CapCincoEvidencia, @RequestParam(required=false, name="CapCincoP") double CapCincoP, 
-			@RequestParam(required=true, name="Otros") double Otros,
-			@RequestParam(required=false, name="OtrosEvidencia") MultipartFile OtrosEvidencia, @RequestParam(required=false, name="OtrosP") double OtrosP,
-			@RequestParam(required=true, name="Total") double Total,
-			@RequestParam(required=false, name="TotalEvidencia") MultipartFile TotalEvidencia, @RequestParam(required=false, name="TotalP") double TotalP,
-			@RequestParam(required=true, name="RcursoAsignado") double RecursoNoAsignado,
-			@RequestParam(required=true, name="RecursoAsignadoP") double RecursoNOAsignadoP,
-			@RequestParam(required=false, name="RecursoAsignadoEv") MultipartFile RecursoNoAsignadoEv
+			@RequestParam(required=false, name="CapDosEvidencia") String capDosEvidencia,@RequestParam(required=false, name="CapDosEvidenciaFile") MultipartFile capDosEvidenciaFile,  
+			@RequestParam(required=true, name="CapTres") double capTres, @RequestParam(required=true, name="CapTresP") double capTresP,
+			@RequestParam(required=false, name="CapTresEvidencia") String capTresEvidencia,@RequestParam(required=false, name="CapTresEvidenciaFile") MultipartFile capTresEvidenciaFile,  
+			@RequestParam(required=true, name="CapCuatro") double capCuatro, @RequestParam(required=true, name="CapCuatroP") double capCuatroP,
+			@RequestParam(required=false, name="CapCuatroEvidencia") String capCuatroEvidencia,@RequestParam(required=false, name="CapCuatroEvidenciaFile") MultipartFile capCuatroEvidenciaFile,
+			@RequestParam(required=true, name="CapCinco") double capCinco, @RequestParam(required=true, name="CapCincoP") double capCincoP,
+			@RequestParam(required=false, name="CapCincoEvidencia") String capCincoEvidencia,@RequestParam(required=false, name="CapCincoEvidenciaFile") MultipartFile capCincoEvidenciaFile,	
+			@RequestParam(required=true, name="Otros") double Otros, @RequestParam(required=false, name="OtrosP") double OtrosP,
+			@RequestParam(required=true, name="OtrosEvidencia") String OtrosEvidencia, @RequestParam(required=false, name="OtrosEvidenciaFile") MultipartFile OtrosEvidenciaFile,
+			@RequestParam(required=true, name="Total") double Total, @RequestParam(required=false, name="TotalP") double TotalP,
+			@RequestParam(required=false, name="CapTotalEvidencia") String TotalEvidencia, @RequestParam(required=false, name="CapTotalEvidenciaFile") MultipartFile TotalEvidenciaFile,
+			@RequestParam(required=true, name="NoAsignado") double NoAsignado, @RequestParam(required=true, name="NoAsignadoP") double NoAsignadoP,
+			@RequestParam(required=true, name="NoAsignadoEvidencia") String NoAsignadoEvidencia, @RequestParam(required=false, name="NoAsignadoEvidencia") MultipartFile NoAsignadoEvidenciaFile,
+			@RequestParam(required=false, name="Id") Integer Id
 			) {
 		
 		FileResponse res = new FileResponse();
@@ -54,36 +55,114 @@ public class RecursoEjercidoController extends BaseControllerImpl<RecursoEjercid
 		obj.setId_departamento(DepartamentoId);
 		obj.setId_periodo(PeriodoId);
 		obj.setCap_dos(capDos);
-		obj.setCap_dos(capDosP);
-		obj.setCap_dos_ev("evidencia2.pdf");
-		obj.setCap_tres(CapTres);
-		obj.setCap_tres_p(CapTresP);
-		obj.setCap_tres_ev("evidencia3.pdf");
-		obj.setCap_cuatro(CapCuatro);
-		obj.setCap_cuatro_p(CapCuatroP);
-		obj.setCap_cuatro_ev("evidencia4.pdf");
-		obj.setCap_cinco(CapCinco);
-		obj.setCap_cinco_p(CapCincoP);
-		obj.setCap_cinco_ev("evidencia5.pdf");
+		obj.setCap_dos_p(capDosP);
+		if(capDosEvidencia!=null && !capDosEvidencia.equals("null")) {
+			System.out.println("entro dos");
+			obj.setCap_dos_ev(capDosEvidencia);
+		}		
+		obj.setCap_tres(capTres);
+		obj.setCap_tres_p(capTresP);
+		if(capTresEvidencia!=null && !capTresEvidencia.equals("null")) {
+			System.out.println("entro tres");
+			obj.setCap_tres_ev(capTresEvidencia);
+		}	
+		obj.setCap_cuatro(capCuatro);
+		obj.setCap_cuatro_p(capCuatroP);
+		if(capCuatroEvidencia!=null && !capCuatroEvidencia.equals("null")) {
+			System.out.println("entro cuatro");
+			obj.setCap_cuatro_ev(capCuatroEvidencia);
+		}	
+		obj.setCap_cinco(capCinco);
+		obj.setCap_cinco_p(capCincoP);
+		if(capCincoEvidencia!=null && !capCincoEvidencia.equals("null")) {
+			System.out.println("entro cinco");
+			obj.setCap_cinco_ev(capCincoEvidencia);
+		}	
 		obj.setOtros(Otros);
 		obj.setOtros_p(OtrosP);
-		obj.setOtros_ev("evidencia6.pdf");
+		if(OtrosEvidencia!=null && !OtrosEvidencia.equals("null")) {
+			System.out.println("entro otros");
+			obj.setOtros_ev(OtrosEvidencia);
+		}	
 		obj.setTotal(TotalP);
 		obj.setTotal_p(TotalP);
-		obj.setTotal_ev("total.pdf");
-		obj.setRecurso_no_asignado(RecursoNoAsignado);
-		obj.setRecurso_no_asignado_p(RecursoNOAsignadoP);
-		obj.setRecurso_no_asignado_ev( RecursoNoAsignadoEv);
+		if(TotalEvidencia !=null && !TotalEvidencia.equals("null")) {
+			System.out.println("entro total");
+			obj.setTotal_ev(TotalEvidencia);
+		}	
+		obj.setRecurso_no_asignado(NoAsignado);
+		obj.setRecurso_no_asignado_p(NoAsignadoP);
+		if(NoAsignadoEvidencia!=null && !NoAsignadoEvidencia.equals("null")) {
+			System.out.println("entro no asignado");
+			obj.setRecurso_no_asignado_ev(NoAsignadoEvidencia);
+		}	
 		
-		
+		if(Id != null) {
+			obj.setId(Id);		
+		}
 		
 		service.save(obj);
 		
+		/*Save files*/
+		String msgErrorArchivos = "";
+		if( capDosEvidenciaFile !=null ) {
+			String[] nombreArchivo = capDosEvidenciaFile.getOriginalFilename().split("\\.");
+			String nombreFile = capDosEvidencia;
+			res =  Utilidades.SubirArchivos(capDosEvidenciaFile, nombreFile);
+			if(res.getStatus()!=200) {
+				msgErrorArchivos += "No se pudo guardar el archivo de cap200.";
+			}
+		}
+		if( capTresEvidenciaFile !=null ) {
+			String[] nombreArchivo = capTresEvidenciaFile.getOriginalFilename().split("\\.");
+			String nombreFile = capTresEvidencia;
+			res =  Utilidades.SubirArchivos(capTresEvidenciaFile, nombreFile);
+			if(res.getStatus()!=200) {
+				msgErrorArchivos += "No se pudo guardar el archivo de cap200.";
+			}
+		}
+		if( capCuatroEvidenciaFile !=null ) {
+			String[] nombreArchivo = capCuatroEvidenciaFile.getOriginalFilename().split("\\.");
+			String nombreFile = capCuatroEvidencia;
+			res =  Utilidades.SubirArchivos(capCuatroEvidenciaFile, nombreFile);
+			if(res.getStatus()!=200) {
+				msgErrorArchivos += "No se pudo guardar el archivo de cap200.";
+			}
+		}
+		if( capCincoEvidenciaFile !=null ) {
+			String[] nombreArchivo = capCincoEvidenciaFile.getOriginalFilename().split("\\.");
+			String nombreFile = capCincoEvidencia;
+			res =  Utilidades.SubirArchivos(capCincoEvidenciaFile, nombreFile);
+			if(res.getStatus()!=200) {
+				msgErrorArchivos += "No se pudo guardar el archivo de cap200.";
+			}
+		}
+		if( OtrosEvidenciaFile !=null ) {
+			String[] nombreArchivo = OtrosEvidenciaFile.getOriginalFilename().split("\\.");
+			String nombreFile = OtrosEvidencia;
+			res =  Utilidades.SubirArchivos(OtrosEvidenciaFile, nombreFile);
+			if(res.getStatus()!=200) {
+				msgErrorArchivos += "No se pudo guardar el archivo de cap200.";
+			}
+		}
+		if( TotalEvidenciaFile !=null ) {
+			String[] nombreArchivo = TotalEvidenciaFile.getOriginalFilename().split("\\.");
+			String nombreFile = TotalEvidencia;
+			res =  Utilidades.SubirArchivos(TotalEvidenciaFile, nombreFile);
+			if(res.getStatus()!=200) {
+				msgErrorArchivos += "No se pudo guardar el archivo de cap200.";
+			}
+		}
 		
 		
-		res.setStatus(200);
-		res.setMessage("Registro guardado correctamente.");
-		res.setTimestamp(new Date().toString());
+		
+		
+		
+		if(msgErrorArchivos.trim().isEmpty()) {
+			res = new FileResponse(new Date().toString(), 200, "Registro guardado correctamente.");
+		}else {
+			res = new FileResponse(new Date().toString(), 501, "No se pudieron subir los siguientes archivos: "+msgErrorArchivos);
+		}
 	
 		return res;
 	}

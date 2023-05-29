@@ -2,6 +2,7 @@ package com.gestiondocumentalserviciosdocentes.demo.controlador;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ public class RecursosAsignadosController  extends BaseControllerImpl<RecursoAsig
 	@GetMapping(value = "/obtener/{deptoId}/{periodoId}")
 	public RecursoAsignado ObtenerRecursoAsignadoPeriodo(@PathVariable int periodoId, @PathVariable int deptoId){
 		return service.ObtenerRecursoAsignadoDeptoPeriodo(deptoId, periodoId);
-	}
+	}	
 	
 	
 	@PostMapping(value="/guardar")
@@ -63,24 +64,26 @@ public class RecursosAsignadosController  extends BaseControllerImpl<RecursoAsig
 		}		
 		obj.setPagoInscripcion(PagoInscripcion);
 		obj.setMontoCaptado(MontoCaptado);
-		obj.setMontoCaptadoTotal(MontoTotal);
+		
+		if(DepartamentoId == 3 || DepartamentoId == 12)//si es electronica o biomedica
+		{
+			int depa = DepartamentoId==3?12:3;
+			RecursoAsignado perAux = service.ObtenerRecursoAsignadoDeptoPeriodo(depa, PeriodoId);
+			obj.setMontoCaptadoTotal(MontoCaptado+perAux.getMontoCaptado());
+		}else {
+			obj.setMontoCaptadoTotal(MontoCaptado);
+		}
+		
+		
 		obj.setMatricula(Matricula);
 		if(MatriculaEvidencia!=null && !MatriculaEvidencia.equals("null")) {
 			System.out.println("entro matricula");
 			obj.setMatriculaEvidencia(MatriculaEvidencia);
 		}
 		
-		System.out.println(!PoaEvidencia.equals("null"));
-		
-		System.out.println(PoaEvidencia);
-		
 		
 		if(Id != null) {
-			obj.setId(Id);
-			/*entidad = service.get(id);
-			if(file==null && entidad.getNombre() != obj.getNombre()) {
-				Utilidades.RenombrarArchivo(entidad.getNombre(), obj.getNombre());
-			}*/
+			obj.setId(Id);		
 		}
 		
 		service.save(obj);
@@ -89,7 +92,7 @@ public class RecursosAsignadosController  extends BaseControllerImpl<RecursoAsig
 		String msgErrorArchivos = "";
 		if(PoaEvidenciaFile!=null ) {
 			String[] nombreArchivo = PoaEvidenciaFile.getOriginalFilename().split("\\.");
-			String nombreFile = PoaEvidencia+"."+nombreArchivo[nombreArchivo.length-1];
+			String nombreFile = PoaEvidencia;
 			res =  Utilidades.SubirArchivos(PoaEvidenciaFile, nombreFile);
 			if(res.getStatus()!=200) {
 				msgErrorArchivos += "No se pudo guardar el archivo de POA.";

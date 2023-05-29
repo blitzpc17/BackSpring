@@ -7,6 +7,7 @@ import com.gestiondocumentalserviciosdocentes.demo.InterfaceService.InterfaceRec
 import com.gestiondocumentalserviciosdocentes.demo.genericos.BaseRepository;
 import com.gestiondocumentalserviciosdocentes.demo.genericos.GenericServiceImplm;
 import com.gestiondocumentalserviciosdocentes.demo.interfaz.IRecursoProgramado;
+import com.gestiondocumentalserviciosdocentes.demo.modelo.RecursoAsignado;
 import com.gestiondocumentalserviciosdocentes.demo.modelo.RecursoProgramado;
 
 @Service
@@ -19,6 +20,12 @@ public class RecursoProgramadoServiceImpl extends GenericServiceImplm<RecursoPro
 		// TODO Auto-generated method stub
 		return iRecursoProgramado;
 	}
+	@Override
+	public RecursoProgramado ObtenerRecursoProgramadoDeptoPeriodo(int depto, int periodo) {
+		// TODO Auto-generated method stub
+		return iRecursoProgramado.Obtener(periodo, depto);
+	}
+	
 }
 
 
